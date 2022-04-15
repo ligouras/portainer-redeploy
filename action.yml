@@ -1,0 +1,24 @@
+name: Portainer redeploy action
+description: Update and restart an existing Portainer stack
+author: ligouras
+branding:
+  icon: 'anchor'
+  color: 'blue'
+
+inputs:
+  portainer-host:
+    required: true
+    description: 'Portainer host e.g. https://portainer.example.com'
+  access-token:
+    required: true
+    description: 'Portainer Access Token'
+  stack-name:
+    required: true
+    description: 'Name of Portainer stack to deploy'
+  stack-env:
+    required: false
+    description: 'Environment variables to configure'
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
