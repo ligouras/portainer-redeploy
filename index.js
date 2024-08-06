@@ -1,6 +1,6 @@
 const axios = require("axios");
 const core = require('@actions/core');
-const csvparse = require('csv-parse/lib/sync');
+const csvparse = require('csv-parse/sync');
 const github = require('@actions/github');
 
 async function getInputList(name, ignoreComma) {
