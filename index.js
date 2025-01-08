@@ -114,8 +114,11 @@ const main = async () => {
       }
     });
 
+    deploy_data = Object.assign({}, deploy.data);
+    deploy_data.Env = newEnv;
+
     console.log(`Stack ${stackName} updated:`);
-    console.log(JSON.stringify(deploy.data, null, 4));
+    console.log(JSON.stringify(deploy_data, null, 4));
 
   } catch (error) {
     core.setFailed(error.message);
