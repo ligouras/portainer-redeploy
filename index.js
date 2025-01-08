@@ -39,6 +39,9 @@ const main = async () => {
     const stackName = core.getInput('stack-name', {
       required: true
     });
+    const endpointId = core.getInput('endpoint-id', {
+      required: true
+    });
     const stackEnv = await getInputList('stack-env', true);
 
     const newEnv = stackEnv.map(env => {
@@ -83,7 +86,7 @@ const main = async () => {
       }
     });
 
-    const deploy = await axios.put(`${portainerHost}/api/stacks/${stack.Id}?endpointId=1`, {
+    const deploy = await axios.put(`${portainerHost}/api/stacks/${stack.Id}?endpointId=${endpointId}`, {
       env: stack.Env.filter(env => !newEnv.find(newEnv => newEnv.name == env.name)).concat(newEnv),
       prune: true,
       StackFileContent: file.data.StackFileContent
