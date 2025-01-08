@@ -12,6 +12,9 @@ inputs:
   access-token:
     required: true
     description: 'Portainer Access Token'
+  endpoint-id:
+    required: false
+    description: 'Portainer Endpoint ID'
   stack-name:
     required: true
     description: 'Name of Portainer stack to deploy'

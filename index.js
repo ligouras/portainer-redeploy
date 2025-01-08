@@ -33,13 +33,31 @@ const main = async () => {
     const portainerHost = core.getInput('portainer-host', {
       required: true
     });
+
     const accessToken = core.getInput('access-token', {
       required: true
     });
-    const stackName = core.getInput('stack-name', {
-      required: true
-    });
+
     const endpointId = core.getInput('endpoint-id', {
+      required: false
+    });
+
+    if (!endpointId) {
+      const endpoints = await axios.get(`${portainerHost}/api/endpoints`, {
+        headers: {
+          'X-API-Key': accessToken
+        }
+      });
+
+      const endpoint = endpoints.data.find(endpoint => endpoint.Name == 'local');
+      if (!endpoint) {
+        endpointId = endpoints.data[0].Id;
+      } else {
+        endpointId = endpoint.Id;
+      }
+    }
+
+    const stackName = core.getInput('stack-name', {
       required: true
     });
     const stackEnv = await getInputList('stack-env', true);
